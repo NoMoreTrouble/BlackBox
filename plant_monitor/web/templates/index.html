@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="grid">
+    <div class="card">
+      <div class="muted">{{ _('Temperature') }}</div>
+      <div class="value">{{ last.temperature if last else '-' }} °C</div>
+    </div>
+    <div class="card">
+      <div class="muted">{{ _('Humidity') }}</div>
+      <div class="value">{{ last.humidity if last else '-' }} %</div>
+    </div>
+    <div class="card">
+      <div class="muted">{{ _('Soil average') }}</div>
+      <div class="value">{{ last.soil_avg if last else '-' }} %</div>
+    </div>
+    <div class="card">
+      <div class="muted">{{ _('Water level') }}</div>
+      <div class="waterbar">
+        <div id="waterFill" class="fill" style="height: {{ (last.water_level_pct if last else 0) }}%;"></div>
+      </div>
+      <div class="muted" style="margin-top:6px;">{{ _('Tank') }}: <span id="waterPct">{{ last.water_level_pct if last else '-' }}</span>%</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <div class="row" style="justify-content: space-between;">
+      <strong>{{ _('Manual Controls') }}</strong>
+      <form class="inline" method="post" action="/manual/irrigate">
+        <input type="number" name="seconds" min="1" value="5">
+        <button class="btn">{{ _('Irrigate (sec)') }}</button>
+      </form>
+      <form class="inline" method="post" action="/manual/light">
+        <select name="action"><option value="on">{{ _('Light ON') }}</option><option value="off">{{ _('Light OFF') }}</option></select>
+        <button class="btn">{{ _('Apply') }}</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="grid" style="margin-top:14px;">
+    <div class="card"><canvas id="chartTemp" height="180"></canvas></div>
+    <div class="card"><canvas id="chartHum" height="180"></canvas></div>
+    <div class="card"><canvas id="chartSoil" height="180"></canvas></div>
+    <div class="card"><canvas id="chartSoilAvg" height="180"></canvas></div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function loadData() {
+  const res = await fetch('/api/history?range=24h');
+  const data = await res.json();
+  return data;
+}
+
+function lineChart(ctx, lbl, arr) {
+  const labels = arr.map((_,i)=>i);
+  return new Chart(ctx, {
+    type: 'line',
+    data: { labels: data.ts, datasets: [{ label: lbl, data: arr, tension: 0.2 }] },
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { color: '#e0e0e0' } } },
+      scales: {
+        x: { ticks: { color: '#bdbdbd' }, grid: { color: '#2e2e2e' } },
+        y: { ticks: { color: '#bdbdbd' }, grid: { color: '#2e2e2e' } },
+      }
+    }
+  });
+}
+
+let data = null;
+(async () => {
+  data = await loadData();
+  document.getElementById('waterFill').style.height = (data.water_level_pct.at(-1) || 0) + '%';
+  document.getElementById('waterPct').textContent = (data.water_level_pct.at(-1) || 0).toFixed ? (data.water_level_pct.at(-1)).toFixed(1) : data.water_level_pct.at(-1);
+
+  lineChart(document.getElementById('chartTemp'), '{{ _("Temperature") }}', data.temperature);
+  lineChart(document.getElementById('chartHum'), '{{ _("Humidity") }}', data.humidity);
+
+  new Chart(document.getElementById('chartSoil'), {
+    type: 'line',
+    data: {
+      labels: data.ts,
+      datasets: [
+        { label: '{{ _("Soil 1") }}', data: data.soil1, tension: 0.2 },
+        { label: '{{ _("Soil 2") }}', data: data.soil2, tension: 0.2 },
+        { label: '{{ _("Soil 3") }}', data: data.soil3, tension: 0.2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { color: '#e0e0e0' } } },
+      scales: {
+        x: { ticks: { color: '#bdbdbd' }, grid: { color: '#2e2e2e' } },
+        y: { ticks: { color: '#bdbdbd' }, grid: { color: '#2e2e2e' } },
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartSoilAvg'), {
+    type: 'line',
+    data: {
+      labels: data.ts,
+      datasets: [
+        { label: '{{ _("Soil average") }}', data: data.soil_avg, tension: 0.2 },
+        { label: '{{ _("Soil average (EWMA)") }}', data: data.soil_avg_ewma, tension: 0.2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { color: '#e0e0e0' } } },
+      scales: {
+        x: { ticks: { color: '#bdbdbd' }, grid: { color: '#2e2e2e' } },
+        y: { ticks: { color: '#bdbdbd' }, grid: { color: '#2e2e2e' } },
+      }
+    }
+  });
+})();
+</script>
+{% endblock %}

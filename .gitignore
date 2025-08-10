@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.env
+.venv/
+venv/
+env/
+build/
+dist/
+.eggs/
+*.egg-info/
+.coverage
+htmlcov/
+
+# Logs & runtime
+var/log/
+*.log
+*.sqlite3
+instance/
+*.db
+
+# Secrets
+.env*
+!/.env.example
+
+# Node/JS (if any)
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+.docker/
+.tmp/
+.cache/
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Translations compiled
+**/messages.mo
+
+# Tests
+.pytest_cache/
+junit*.xml

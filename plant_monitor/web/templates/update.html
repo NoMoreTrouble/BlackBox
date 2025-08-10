@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="card">
+    <h3 style="margin:0 0 10px 0;">{{ _('Updates') }}</h3>
+    <div class="muted">{{ _('Webhook-triggered Git pull with rollback on failure.') }}</div>
+  </div>
+  <div class="card" style="margin-top:14px;">
+    {% for row in logs %}
+      <div style="margin-bottom:10px;">
+        <div class="muted">{{ row.ts }}</div>
+        <div><strong>{{ row.status }}</strong></div>
+        <pre style="white-space:pre-wrap; background:#0e0e0e; padding:8px; border-radius:8px; border:1px solid #2e2e2e;">{{ row.message }}</pre>
+      </div>
+    {% else %}
+      <div class="muted">{{ _('No updates yet.') }}</div>
+    {% endfor %}
+  </div>
+{% endblock %}

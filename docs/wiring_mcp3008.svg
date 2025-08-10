@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="300">
+  <rect x="10" y="10" width="200" height="120" fill="#1a1a1a" stroke="#888"/>
+  <text x="20" y="35" fill="#e0e0e0" font-family="monospace">Raspberry Pi</text>
+  <rect x="260" y="10" width="200" height="120" fill="#1a1a1a" stroke="#888"/>
+  <text x="270" y="35" fill="#e0e0e0" font-family="monospace">MCP3008</text>
+  <rect x="500" y="10" width="110" height="200" fill="#1a1a1a" stroke="#888"/>
+  <text x="510" y="35" fill="#e0e0e0" font-family="monospace">Soil Probes</text>
+
+  <line x1="110" y1="60" x2="300" y2="60" stroke="#bbb"/>
+  <text x="120" y="55" fill="#bbb" font-size="12">3V3 ➜ VDD</text>
+
+  <line x1="110" y1="80" x2="300" y2="80" stroke="#bbb"/>
+  <text x="120" y="75" fill="#bbb" font-size="12">GND ➜ AGND/DGND</text>
+
+  <line x1="110" y1="100" x2="300" y2="100" stroke="#bbb"/>
+  <text x="120" y="95" fill="#bbb" font-size="12">SCLK ➜ CLK</text>
+
+  <line x1="110" y1="120" x2="300" y2="120" stroke="#bbb"/>
+  <text x="120" y="115" fill="#bbb" font-size="12">MOSI ➜ DIN</text>
+
+  <line x1="110" y1="140" x2="300" y2="140" stroke="#bbb"/>
+  <text x="120" y="135" fill="#bbb" font-size="12">MISO ➜ DOUT</text>
+
+  <line x1="110" y1="160" x2="300" y2="160" stroke="#bbb"/>
+  <text x="120" y="155" fill="#bbb" font-size="12">CE0/CE1 ➜ CS</text>
+
+  <line x1="360" y1="60" x2="550" y2="60" stroke="#bbb"/>
+  <text x="370" y="55" fill="#bbb" font-size="12">CH0/1/2 ➜ Probes</text>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="300">
+  <rect x="10" y="10" width="200" height="120" fill="#1a1a1a" stroke="#888"/>
+  <text x="20" y="35" fill="#e0e0e0" font-family="monospace">Raspberry Pi</text>
+  <rect x="260" y="10" width="180" height="120" fill="#1a1a1a" stroke="#888"/>
+  <text x="270" y="35" fill="#e0e0e0" font-family="monospace">ADS1115</text>
+  <rect x="480" y="10" width="120" height="200" fill="#1a1a1a" stroke="#888"/>
+  <text x="490" y="35" fill="#e0e0e0" font-family="monospace">Soil Probes</text>
+
+  <line x1="110" y1="80" x2="290" y2="80" stroke="#bbb"/>
+  <text x="120" y="75" fill="#bbb" font-size="12">SCL ➜ SCL</text>
+
+  <line x1="110" y1="100" x2="290" y2="100" stroke="#bbb"/>
+  <text x="120" y="95" fill="#bbb" font-size="12">SDA ➜ SDA</text>
+
+  <line x1="110" y1="60" x2="290" y2="60" stroke="#bbb"/>
+  <text x="120" y="55" fill="#bbb" font-size="12">3V3 ➜ VCC</text>
+
+  <line x1="110" y1="120" x2="290" y2="120" stroke="#bbb"/>
+  <text x="120" y="115" fill="#bbb" font-size="12">GND ➜ GND</text>
+
+  <line x1="350" y1="60" x2="520" y2="60" stroke="#bbb"/>
+  <text x="360" y="55" fill="#bbb" font-size="12">AIN0/1/2 ➜ Probes</text>
+</svg>

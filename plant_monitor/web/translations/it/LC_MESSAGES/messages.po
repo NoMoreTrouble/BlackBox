@@ -1,0 +1,77 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: plant-monitor\n"
+"Language: it\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Logout"
+msgstr "Esci"
+
+msgid "Dark monochrome UI"
+msgstr "Interfaccia monocromatica scura"
+
+msgid "Sign in"
+msgstr "Accedi"
+
+msgid "Username"
+msgstr "Nome utente"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Login"
+msgstr "Accedi"
+
+msgid "Invalid credentials"
+msgstr "Credenziali non valide"
+
+msgid "Temperature"
+msgstr "Temperatura"
+
+msgid "Humidity"
+msgstr "Umidità"
+
+msgid "Soil average"
+msgstr "Media suolo"
+
+msgid "Water level"
+msgstr "Livello acqua"
+
+msgid "Tank"
+msgstr "Serbatoio"
+
+msgid "Manual Controls"
+msgstr "Controlli manuali"
+
+msgid "Irrigate (sec)"
+msgstr "Irriga (sec)"
+
+msgid "Light ON"
+msgstr "Luce ON"
+
+msgid "Light OFF"
+msgstr "Luce OFF"
+
+msgid "Apply"
+msgstr "Applica"
+
+msgid "Soil 1"
+msgstr "Suolo 1"
+
+msgid "Soil 2"
+msgstr "Suolo 2"
+
+msgid "Suolo 3"
+msgstr "Suolo 3"
+
+msgid "Soil average (EWMA)"
+msgstr "Media suolo (EWMA)"
+
+msgid "Updates"
+msgstr "Aggiornamenti"
+
+msgid "Webhook-triggered Git pull with rollback on failure."
+msgstr "Git pull via webhook con rollback in caso di errore."
+
+msgid "No updates yet."
+msgstr "Nessun aggiornamento per ora."
