@@ -2,7 +2,7 @@ import os
 
 class Config:
     SECRET_KEY = os.getenv("FLASK_SECRET_KEY", "dev-secret")
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite:///var/plant_monitor.sqlite3")
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite:////opt/BlackBox/var/plant_monitor.sqlite3")
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     DEBUG = bool(int(os.getenv("FLASK_DEBUG", "0")))

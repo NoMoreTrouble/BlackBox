@@ -1,17 +1,16 @@
-Flask==3.0.3
-Flask-Login==0.6.3
-Flask-Babel==4.0.0
-Flask-SQLAlchemy==3.1.1
-SQLAlchemy==2.0.32
-python-dotenv==1.0.1
-Werkzeug==3.0.3
-APScheduler==3.10.4
-requests==2.32.3
-gunicorn==22.0.0
+Flask
+Flask-Login
+Flask-Babel
+Flask-SQLAlchemy
+SQLAlchemy
+python-dotenv
+Werkzeug
+APScheduler
+requests
+gunicorn
 
 # Raspberry Pi / GPIO (installed only on Pi)
-RPi.GPIO==0.7.1
-Adafruit_DHT==1.4.0
-adafruit-circuitpython-ads1x15==2.2.24
-spidev==3.6
-gpiozero==1.6.2
+RPi.GPIO
+spidev
+gpiozero
+adafruit-circuitpython-dht

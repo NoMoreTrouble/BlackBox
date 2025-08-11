@@ -8,7 +8,7 @@ from .utils.health import register_health
 from .web.routes import bp as main_bp
 from .web.auth import bp as auth_bp
 from .web.api import bp as api_bp
-from .web.i18n import register_i18n
+from .web.i18n import register_i18n, get_locale
 from .models import db, User
 from .control.controller import ControlLoop
 from .utils.update import register_update_routes
@@ -27,12 +27,17 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
-    babel.init_app(app, default_locale=app.config["BABEL_DEFAULT_LOCALE"])
+    babel.init_app(app,  locale_selector=get_locale)
 
-    register_i18n(app, babel)
+    register_i18n(app)
 
     with app.app_context():
-        db.create_all()
+        try:
+            db.create_all()
+            print("Datababse tables created.")
+        except Exception as e:
+            print(f"Error creating database tables: {e}")
+
         # Ensure admin user exists
         if not User.query.filter_by(username=app.config["ADMIN_USERNAME"]).first():
             User.create_admin(app.config["ADMIN_USERNAME"], app.config["ADMIN_PASSWORD"])
@@ -45,7 +50,7 @@ def create_app():
 
     # Start control loop thread on first request
     cl = ControlLoop(app.config)
-    @app.before_first_request
+    
     def start_background():
         t = threading.Thread(target=cl.run, daemon=True)
         t.start()
