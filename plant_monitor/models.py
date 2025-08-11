@@ -39,12 +39,12 @@ class Reading(db.Model):
 class ActuationLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     ts = db.Column(db.DateTime, default=datetime.utcnow)
-    device = db.Column(db.String(32)) # "light" or "irrigation"
-    action = db.Column(db.String(32)) # "on"/"off"/"pulse"
+    device = db.Column(db.String(32))
+    action = db.Column(db.String(32))
     duration = db.Column(db.Integer, default=0)
 
 class UpdateLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     ts = db.Column(db.DateTime, default=datetime.utcnow)
-    status = db.Column(db.String(32)) # started/success/failure
+    status = db.Column(db.String(32))
     message = db.Column(db.Text)

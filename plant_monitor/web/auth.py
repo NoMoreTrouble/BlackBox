@@ -1,9 +1,12 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
-from flask_babel import _
+try:
+    from flask_babel import _
+except Exception:
+    _ = lambda s: s  # fallback if Babel not installed
 from ..models import User
 
-bp = Blueprint("auth", __name__)
+bp = Blueprint("auth", __name__, template_folder="templates")
 
 @bp.route("/login", methods=["GET", "POST"])
 def login():

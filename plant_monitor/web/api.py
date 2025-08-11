@@ -8,14 +8,14 @@ bp = Blueprint("api", __name__)
 def history():
     rng = request.args.get("range", "24h")
     now = datetime.utcnow()
-    if rng.endswith("h"):
-        hours = int(rng[:-1])
-        start = now - timedelta(hours=hours)
-    elif rng.endswith("d"):
-        days = int(rng[:-1])
-        start = now - timedelta(days=days)
-    else:
-        start = now - timedelta(hours=24)
+    start = now - timedelta(hours=24)
+    try:
+        if rng.endswith("h"):
+            start = now - timedelta(hours=int(rng[:-1]))
+        elif rng.endswith("d"):
+            start = now - timedelta(days=int(rng[:-1]))
+    except Exception:
+        pass
 
     q = Reading.query.filter(Reading.ts >= start).order_by(Reading.ts.asc()).all()
     data = {

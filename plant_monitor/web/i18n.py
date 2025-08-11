@@ -1,14 +1,27 @@
-from flask_babel import Babel
-from flask import request
+try:
+    from flask_babel import Babel
+except Exception:
+    Babel = None
+from flask import request, session
 
-# Initialize Babel object
-babel = Babel()
-
-def get_locale():
-    # This function determines which locale to use
-    return 'en'  # Hardcoding 'en' just for now
+babel = Babel() if Babel else None
 
 def register_i18n(app):
-    # Initialize Babel with the app and pass get_locale function
-    babel.init_app(app, locale_selector=get_locale)
+    if babel is None:
+        # Babel not installed; provide a no-op locale setter
+        @app.get("/lang/<locale>")
+        def set_lang(locale):
+            session["lang"] = locale
+            return ("", 204)
+        return
 
+    app.config.setdefault("BABEL_SUPPORTED_LOCALES", ["en", "it"])
+    def _selector():
+        return session.get("lang") or request.accept_languages.best_match(app.config["BABEL_SUPPORTED_LOCALES"])
+    babel.init_app(app, locale_selector=_selector)
+
+    @app.get("/lang/<locale>")
+    def set_lang(locale):
+        if locale in app.config["BABEL_SUPPORTED_LOCALES"]:
+            session["lang"] = locale
+        return ("", 204)
